@@ -89,6 +89,26 @@
                value="-0.1">
          </parameter>
       </key>
+      <key
+            commandId="PDFViewer.command.Zoom"
+            contextId="PDFViewer.editors.contextid"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="*">
+         <parameter
+               id="PDFViewer.command.parameter.zoom"
+               value="fith">
+         </parameter>
+      </key>
+      <key
+            commandId="PDFViewer.command.Zoom"
+            contextId="PDFViewer.editors.contextid"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="/">
+         <parameter
+               id="PDFViewer.command.parameter.zoom"
+               value="fit">
+         </parameter>
+      </key>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
