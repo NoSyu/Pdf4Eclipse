@@ -756,7 +756,7 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 	
 	public void movePage(int direction)
 	{
-		Point curloc = pv.getLocation();
+		Point pv_curloc = pv.getLocation();
 		sc.setRedraw(false);
 		
 		switch(direction)
@@ -765,53 +765,53 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 			// Down
 			int client_h = sc.getClientArea().height;
 			int page_h = (int) pv.getPage().getHeight();
-			if(curloc.y + page_h + 10 > client_h)
+			if(pv_curloc.y + page_h + 10 > client_h)
 			{
-				curloc.y += client_h - page_h;
+				pv_curloc.y += client_h - page_h;
 			}
 			else
 			{
-				curloc.y += 10;	
+				pv_curloc.y += 10;	
 			}
-			pv.setLocation(curloc);
+			pv.setLocation(pv_curloc);
 			break;
 		case 1:
 			// Up
-			if(curloc.y - 10 >= 0)
+			if(pv_curloc.y - 10 >= 0)
 			{
-				curloc.y -= 10;
+				pv_curloc.y -= 10;
 			}
 			else
 			{
-				curloc.y = 0;
+				pv_curloc.y = 0;
 			}
-			pv.setLocation(curloc);
+			pv.setLocation(pv_curloc);
 			break;
 		case 2:
 			// Left
-			if(curloc.x - 10 >= 0)
+			if(pv_curloc.x - 10 >= 0)
 			{
-				curloc.x -= 10;				
+				pv_curloc.x -= 10;				
 			}
 			else
 			{
-				curloc.x = 0;
+				pv_curloc.x = 0;
 			}
-			pv.setLocation(curloc);
+			pv.setLocation(pv_curloc);
 			break;
 		case 3:
 			// Right
 			int client_w = sc.getClientArea().width;
 			int page_w = (int) pv.getPage().getWidth();
-			if(curloc.x + page_w + 10 > client_w)
+			if(pv_curloc.x + page_w + 10 > client_w)
 			{
-				curloc.x += client_w - page_w;
+				pv_curloc.x += client_w - page_w;
 			}
 			else
 			{
-				curloc.x += 10;				
+				pv_curloc.x += 10;				
 			}
-			pv.setLocation(curloc);
+			pv.setLocation(pv_curloc);
 			break;
 		default:
 			System.err.println("Weird! in PDFEditor movePage");
@@ -843,9 +843,11 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 	}
 
 	private void setOrigin(int x, int y) {
+		Point cv_nowloc = pv.getLocation();
 		sc.setRedraw(false);
 		sc.setOrigin(x, y);
 		sc.setRedraw(true);
+		pv.setLocation(cv_nowloc);
 	}
 
 	void setOrigin(Point p) {

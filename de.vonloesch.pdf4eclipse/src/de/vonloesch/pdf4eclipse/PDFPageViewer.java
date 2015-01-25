@@ -61,9 +61,9 @@ public class PDFPageViewer extends Canvas implements PaintListener, IPreferenceC
     /** the current transform from device space to page space */
     AffineTransform currentXform;
     /** The horizontal offset of the image from the left edge of the panel */
-    int offx;
+//    int offx;
     /** The vertical offset of the image from the top of the panel */
-    int offy;
+//    int offy;
     
     private boolean highlightLinks;
     private Rectangle2D highlight;
@@ -376,8 +376,8 @@ public class PDFPageViewer extends Canvas implements PaintListener, IPreferenceC
             int imhgt = currentImage.getHeight(null);
             
             // draw it centered within the panel
-            offx = (sz.x - imwid) / 2;
-            offy = (sz.y - imhgt) / 2;
+//            offx = (sz.x - imwid) / 2;
+//            offy = (sz.y - imhgt) / 2;
 
             if ((imwid == sz.x && imhgt <= sz.y) ||
                     (imhgt == sz.y && imwid <= sz.x)) {
