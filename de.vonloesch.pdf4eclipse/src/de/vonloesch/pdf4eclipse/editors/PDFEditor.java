@@ -851,9 +851,11 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 	}
 
 	void setOrigin(Point p) {
+		Point cv_nowloc = pv.getLocation();
 		sc.setRedraw(false);
 		if (p != null) sc.setOrigin(p);
 		sc.setRedraw(true);
+		pv.setLocation(cv_nowloc);
 	}
 
 }
