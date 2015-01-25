@@ -285,25 +285,34 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 				
 				int height = sc.getClientArea().height;
 				int pheight = sc.getContent().getBounds().height;
-
+				
 				if (p.y >= pheight - height && e.count < 0) {
 					//We are at the end of the page
 					if (currentPage < f.getNumPages()) {
 						showPage(currentPage + 1);
 						setOrigin(sc.getOrigin().x, 0);
-						e.doit = false;
-						lastTime = time;
 					}
+					else
+					{
+						showPage(currentPage);
+						setOrigin(sc.getOrigin().x, 0);
+					}
+					e.doit = false;
+					lastTime = time;
 				} else if (p.y <= 0 && e.count > 0) {
 					//We are at the top of the page
 					if (currentPage > 1) {
 						showPage(currentPage - 1);
 						setOrigin(sc.getOrigin().x, pheight);
-						e.doit = false;
-						lastTime = time;
 					}
+					else
+					{
+						showPage(currentPage);
+						setOrigin(sc.getOrigin().x, pheight);
+					}
+					e.doit = false;
+					lastTime = time;
 				}
-				
 			}
 		};
 		
