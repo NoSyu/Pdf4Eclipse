@@ -753,6 +753,72 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 		if (w/pw < h/ph) pv.setZoomFactor(w/pw);
 		else pv.setZoomFactor(h/ph);
 	}
+	
+	public void movePage(int direction)
+	{
+		Point curloc = pv.getLocation();
+		sc.setRedraw(false);
+		
+		switch(direction)
+		{
+		case 0:
+			// Down
+			int client_h = sc.getClientArea().height;
+			int page_h = (int) pv.getPage().getHeight();
+			if(curloc.y + page_h + 10 > client_h)
+			{
+				curloc.y += client_h - page_h;
+			}
+			else
+			{
+				curloc.y += 10;	
+			}
+			pv.setLocation(curloc);
+			break;
+		case 1:
+			// Up
+			if(curloc.y - 10 >= 0)
+			{
+				curloc.y -= 10;
+			}
+			else
+			{
+				curloc.y = 0;
+			}
+			pv.setLocation(curloc);
+			break;
+		case 2:
+			// Left
+			if(curloc.x - 10 >= 0)
+			{
+				curloc.x -= 10;				
+			}
+			else
+			{
+				curloc.x = 0;
+			}
+			pv.setLocation(curloc);
+			break;
+		case 3:
+			// Right
+			int client_w = sc.getClientArea().width;
+			int page_w = (int) pv.getPage().getWidth();
+			if(curloc.x + page_w + 10 > client_w)
+			{
+				curloc.x += client_w - page_w;
+			}
+			else
+			{
+				curloc.x += 10;				
+			}
+			pv.setLocation(curloc);
+			break;
+		default:
+			System.err.println("Weird! in PDFEditor movePage");
+			System.err.println("Arg: direction = " + direction);
+		}
+		sc.setRedraw(true);
+	}
 
 	/**
 	 * Writes an error message to the status line and deletes it after five seconds.

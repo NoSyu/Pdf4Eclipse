@@ -31,6 +31,10 @@ public class ZoomHandler extends AbstractHandler {
 	
 	private static final String FIT_HORIZONTAL = "fith";
 	private static final String FIT_COMPLETE = "fit";
+	private static final String M1_DOWN = "MADown";
+	private static final String M1_UP = "MAUp";
+	private static final String M1_LEFT = "MALeft";
+	private static final String M1_RIGHT = "MARight";
 
 	@Override  
 	public Object execute(ExecutionEvent event) throws ExecutionException {		
@@ -63,7 +67,26 @@ public class ZoomHandler extends AbstractHandler {
 			((PDFEditor) editor).fit();
 			return null;
 		}
-
+		else if (msg.contains("MA")) {
+			if(msg.equals(M1_DOWN))
+			{
+				((PDFEditor) editor).movePage(0);				
+			}
+			else if (msg.equals(M1_UP))
+			{
+				((PDFEditor) editor).movePage(1);				
+			}
+			else if(msg.equals(M1_LEFT))
+			{
+				((PDFEditor) editor).movePage(2);				
+			}
+			else if(msg.equals(M1_RIGHT))
+			{
+				((PDFEditor) editor).movePage(3);				
+			}
+			return null;
+		}
+		
 		((PDFEditor) editor).pv.setZoomFactor(zoomFactor);
 		return null;
 	}

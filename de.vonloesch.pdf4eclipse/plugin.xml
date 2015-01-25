@@ -109,6 +109,46 @@
                value="fit">
          </parameter>
       </key>
+      <key
+            commandId="PDFViewer.command.Zoom"
+            contextId="PDFViewer.editors.contextid"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+ARROW_DOWN">
+         <parameter
+               id="PDFViewer.command.parameter.zoom"
+               value="MADown">
+         </parameter>
+      </key>
+      <key
+            commandId="PDFViewer.command.Zoom"
+            contextId="PDFViewer.editors.contextid"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+ARROW_UP">
+         <parameter
+               id="PDFViewer.command.parameter.zoom"
+               value="MAUp">
+         </parameter>
+      </key>
+      <key
+            commandId="PDFViewer.command.Zoom"
+            contextId="PDFViewer.editors.contextid"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+ARROW_LEFT">
+         <parameter
+               id="PDFViewer.command.parameter.zoom"
+               value="MALeft">
+         </parameter>
+      </key>
+      <key
+            commandId="PDFViewer.command.Zoom"
+            contextId="PDFViewer.editors.contextid"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+ARROW_RIGHT">
+         <parameter
+               id="PDFViewer.command.parameter.zoom"
+               value="MARight">
+         </parameter>
+      </key>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
