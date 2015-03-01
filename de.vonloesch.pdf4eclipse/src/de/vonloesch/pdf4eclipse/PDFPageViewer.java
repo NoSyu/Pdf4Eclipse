@@ -73,6 +73,8 @@ public class PDFPageViewer extends Canvas implements PaintListener, IPreferenceC
     
     private float zoomFactor;
     
+    private Point cur_loc;
+    
     //private org.eclipse.swt.graphics.Image swtImage;
 
     /**
@@ -173,6 +175,7 @@ public class PDFPageViewer extends Canvas implements PaintListener, IPreferenceC
     	display = parent.getDisplay();
         setSize(800, 600);
         zoomFactor = 1.f;
+        this.cur_loc = new Point(0, 0);
         this.addPaintListener(this);
         
         IEclipsePreferences prefs = (new InstanceScope()).getNode(de.vonloesch.pdf4eclipse.Activator.PLUGIN_ID);
@@ -446,4 +449,25 @@ public class PDFPageViewer extends Canvas implements PaintListener, IPreferenceC
     	IEclipsePreferences prefs = (new InstanceScope()).getNode(de.vonloesch.pdf4eclipse.Activator.PLUGIN_ID);
     	prefs.removePreferenceChangeListener(this);
     }
+    
+    /*
+     * 
+     * */
+    public void setLoc()
+    {
+    	this.setLocation(this.cur_loc);
+    }
+    
+    public void setLoc(Point loc)
+    {
+    	this.cur_loc = loc;
+    	setLoc();
+    }
+    
+    @Override
+    public void setBounds (int x, int y, int width, int height)
+    {
+    	super.setBounds(this.cur_loc.x, this.cur_loc.y, width, height);
+    }
+    
 }

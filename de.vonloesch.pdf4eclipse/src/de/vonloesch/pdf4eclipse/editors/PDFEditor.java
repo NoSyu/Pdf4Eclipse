@@ -660,6 +660,7 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 		currentPage = page.getPageNumber();
 		pv.showPage(page);
 		updateStatusLine();
+		pv.setLoc();
 	}
 	
 	public void showPage(int pageNr) {
@@ -669,15 +670,15 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 		currentPage = pageNr;
 		pv.showPage(page);
 		updateStatusLine();
+		pv.setLoc();
 	}
 
 	@Override
 	public void setFocus() {
-		Point cv_nowloc = pv.getLocation();
 		sc.setFocus();
 		updateStatusLine();
 		position.setPageChangeListener(this);
-		pv.setLocation(cv_nowloc);
+		pv.setLoc();
 	}
 
 	/**
@@ -760,11 +761,7 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 	public void fitHorizontal() {
 		int w = sc.getClientArea().width;
 		pv.setZoomFactor((1.0f*w)/pv.getPage().getWidth());
-		
-		sc.setRedraw(false);
-		Point pv_loc = new Point(0, 0);
-		pv.setLocation(pv_loc);
-		sc.setRedraw(true);
+		pv.setLoc();
 	}
 
 	public void fit() {
@@ -774,11 +771,7 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 		float ph = pv.getPage().getHeight();
 		if (w/pw < h/ph) pv.setZoomFactor(w/pw);
 		else pv.setZoomFactor(h/ph);
-
-		sc.setRedraw(false);
-		Point pv_loc = new Point(0, 0);
-		pv.setLocation(pv_loc);
-		sc.setRedraw(true);
+		pv.setLoc();
 	}
 	
 	public void movePage(int direction)
@@ -800,7 +793,7 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 			{
 				pv_curloc.y += 10;	
 			}
-			pv.setLocation(pv_curloc);
+			pv.setLoc(pv_curloc);
 			break;
 		case 1:
 			// Up
@@ -812,7 +805,7 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 			{
 				pv_curloc.y = 0;
 			}
-			pv.setLocation(pv_curloc);
+			pv.setLoc(pv_curloc);
 			break;
 		case 2:
 			// Left
@@ -824,7 +817,7 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 			{
 				pv_curloc.x = 0;
 			}
-			pv.setLocation(pv_curloc);
+			pv.setLoc(pv_curloc);
 			break;
 		case 3:
 			// Right
@@ -838,7 +831,7 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 			{
 				pv_curloc.x += 10;				
 			}
-			pv.setLocation(pv_curloc);
+			pv.setLoc(pv_curloc);
 			break;
 		default:
 			System.err.println("Weird! in PDFEditor movePage");
@@ -872,7 +865,7 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 			pv_curloc.x = delta_w;
 		}
 		
-		pv.setLocation(pv_curloc);
+		pv.setLoc(pv_curloc);
 		
 		sc.setRedraw(true);
 	}
@@ -900,20 +893,18 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 		else return null;
 	}
 
-	private void setOrigin(int x, int y) {
-		Point cv_nowloc = pv.getLocation();
+	private void setOrigin(int x, int y) {	
 		sc.setRedraw(false);
 		sc.setOrigin(x, y);
 		sc.setRedraw(true);
-		pv.setLocation(cv_nowloc);
+		pv.setLoc();
 	}
 
 	void setOrigin(Point p) {
-		Point cv_nowloc = pv.getLocation();
 		sc.setRedraw(false);
 		if (p != null) sc.setOrigin(p);
 		sc.setRedraw(true);
-		pv.setLocation(cv_nowloc);
+		pv.setLoc();
 	}
 
 }
