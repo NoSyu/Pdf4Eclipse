@@ -59,6 +59,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -672,9 +673,11 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 
 	@Override
 	public void setFocus() {
+		Point cv_nowloc = pv.getLocation();
 		sc.setFocus();
 		updateStatusLine();
 		position.setPageChangeListener(this);
+		pv.setLocation(cv_nowloc);
 	}
 
 	/**

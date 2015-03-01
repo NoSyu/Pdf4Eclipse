@@ -37,6 +37,7 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MessageBox;
 
 import de.vonloesch.pdf4eclipse.editors.PDFEditor;
 import de.vonloesch.pdf4eclipse.editors.handlers.ToggleLinkHighlightHandler;
@@ -294,7 +295,7 @@ public class PDFPageViewer extends Canvas implements PaintListener, IPreferenceC
 
     	// set up the new page
     	currentPage = page;
-
+    	
     	//Reset highlight
     	highlight = null;
 
