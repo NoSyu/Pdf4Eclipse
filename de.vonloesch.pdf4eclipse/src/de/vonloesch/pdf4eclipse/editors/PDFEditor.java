@@ -444,7 +444,12 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 				else if (e.keyCode == SWT.END) {
 					showPage(f.getNumPages());
 					setOrigin(sc.getOrigin().x, pheight);
-				}	
+				}
+				else if (e.keyCode == SWT.KEYPAD_5)
+				{
+					movePage_center();
+//					setOrigin(sc.getOrigin().x, pheight);
+				}
 
 			}
 		});
@@ -752,6 +757,11 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 	public void fitHorizontal() {
 		int w = sc.getClientArea().width;
 		pv.setZoomFactor((1.0f*w)/pv.getPage().getWidth());
+		
+		sc.setRedraw(false);
+		Point pv_loc = new Point(0, 0);
+		pv.setLocation(pv_loc);
+		sc.setRedraw(true);
 	}
 
 	public void fit() {
@@ -761,6 +771,11 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 		float ph = pv.getPage().getHeight();
 		if (w/pw < h/ph) pv.setZoomFactor(w/pw);
 		else pv.setZoomFactor(h/ph);
+
+		sc.setRedraw(false);
+		Point pv_loc = new Point(0, 0);
+		pv.setLocation(pv_loc);
+		sc.setRedraw(true);
 	}
 	
 	public void movePage(int direction)
@@ -828,6 +843,37 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 		}
 		sc.setRedraw(true);
 	}
+	
+	public void movePage_center()
+	{
+		Point pv_curloc = new Point(0, 0);
+		float zoomfactor = pv.getZoomFactor();
+		sc.setRedraw(false);
+		
+		// y
+		int client_h = sc.getClientArea().height;
+		int page_h = (int) (zoomfactor * (pv.getPage().getHeight()));
+		if(client_h > page_h)
+		{
+			int margin_h = client_h - page_h;
+			int delta_h = margin_h / 2;
+			pv_curloc.y = delta_h;
+		}
+		// x
+		int client_w = sc.getClientArea().width;
+		int page_w = (int) (zoomfactor * pv.getPage().getWidth());
+		if(client_w > page_w)
+		{
+			int margin_w = client_w - page_w;
+			int delta_w = margin_w / 2;
+			pv_curloc.x = delta_w;
+		}
+		
+		pv.setLocation(pv_curloc);
+		
+		sc.setRedraw(true);
+	}
+	
 
 	/**
 	 * Writes an error message to the status line and deletes it after five seconds.
